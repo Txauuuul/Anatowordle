@@ -97,7 +97,7 @@ $longitudPalabra = strlen($palabraObjetivo);
         <div class="stat-box" style="display: flex; flex-direction: column; align-items: center;">
             <span class="label" style="font-size: 0.7rem; color: #818384;">MODO</span>
             <span class="value" style="color: #f02109; font-weight: bold;">
-                <?php echo isset($_SESSION['is_guest']) ? 'Invitado' : 'Estudiante'; ?>
+                <?php echo ($_SESSION['is_guest'] === true) ? 'Invitado' : 'Estudiante'; ?>
             </span>
         </div>
     </div>

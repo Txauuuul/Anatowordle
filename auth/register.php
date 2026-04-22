@@ -7,7 +7,6 @@
     <title>Registro - AnatoWordle</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        /* Estilos específicos para el formulario */
         .auth-container {
             margin-top: 50px;
             width: 90%;

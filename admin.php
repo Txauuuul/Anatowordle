@@ -1,7 +1,6 @@
 <?php
 include 'includes/db.php';
 
-// SEGURIDAD
 if (!isset($_SESSION['usuario_id']) && !isset($_SESSION['is_guest'])) {
     header("Location: auth/login.php");
     exit();
@@ -12,7 +11,6 @@ if (isset($_SESSION['is_guest']) && $_SESSION['is_guest'] == true) {
 
 $mensaje = "";
 
-// AÑADIR PALABRA
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'crear') {
     $palabra = strtoupper(trim($_POST['palabra']));
     $pista = trim($_POST['pista']);
@@ -34,16 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
     }
 }
 
-// BORRAR PALABRA (Extra útil para limpiar pruebas)
 if (isset($_GET['borrar'])) {
     $idBorrar = $_GET['borrar'];
     $stmt = $pdo->prepare("DELETE FROM terminos_anatomia WHERE id = ?");
     $stmt->execute([$idBorrar]);
-    header("Location: admin.php"); // Recargar para limpiar URL
+    header("Location: admin.php"); 
     exit();
 }
 
-// OBTENER LISTA DE PALABRAS
 $lista = $pdo->query("SELECT * FROM terminos_anatomia ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>

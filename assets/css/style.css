@@ -40,7 +40,6 @@ h1 {
     margin: 0;
 }
 
-/* Animaciones de celdas */
 .cell.active {
     animation: pop 0.1s ease-in-out;
     border-color: var(--color-primary) !important;
@@ -51,22 +50,21 @@ h1 {
 
 @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-/* ESTILOS DEL TECLADO MEJORADO */
 #keyboard-container {
     width: 100%;
     max-width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 6px; /* Espacio entre filas */
+    gap: 6px; 
     padding: 10px;
-    margin-top: auto; /* Empuja el teclado abajo en móviles */
+    margin-top: auto; 
     margin-bottom: 20px;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    gap: 4px; /* Espacio entre teclas */
+    gap: 4px; 
     width: 100%;
 }
 
@@ -82,7 +80,7 @@ h1 {
     user-select: none;
     background-color: var(--key-bg);
     color: white;
-    flex: 1; /* Las teclas ocupan el espacio disponible */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,11 +95,10 @@ h1 {
 }
 
 .key.wide {
-    flex: 1.5; /* Enter y Borrar son más grandes */
+    flex: 1.5; 
     font-size: 0.8rem;
 }
 
-/* Modal */
 .modal {
     display: none; position: fixed; z-index: 1000; left: 0; top: 0;
     width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);

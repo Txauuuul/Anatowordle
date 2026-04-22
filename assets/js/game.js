@@ -1,4 +1,3 @@
-// OBTENEMOS LA LONGITUD DINÁMICA DEL HTML
 const configDiv = document.getElementById('game-config');
 const WORD_LENGTH = configDiv ? parseInt(configDiv.getAttribute('data-length')) : 5;
 
@@ -8,7 +7,6 @@ let currentTile = 0;
 let guess = "";
 const rows = document.querySelectorAll('.row');
 
-// LISTENERS
 window.addEventListener('keydown', (e) => {
     if (document.getElementById('modal-educativo').style.display === 'flex') return;
     
@@ -43,9 +41,7 @@ if (btnCerrar) {
     });
 }
 
-// LÓGICA
 function addLetter(letter) {
-    // Usamos la variable WORD_LENGTH dinámica
     if (currentTile < WORD_LENGTH && currentRow < MAX_ATTEMPTS) {
         const row = rows[currentRow];
         const tile = row.querySelectorAll('.cell')[currentTile];
@@ -70,7 +66,7 @@ function deleteLetter() {
 }
 
 async function submitGuess() {
-    if (guess.length !== WORD_LENGTH) return; // Esperamos a la longitud correcta
+    if (guess.length !== WORD_LENGTH) return; 
 
     const response = await fetch('check_word.php', {
         method: 'POST',

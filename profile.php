@@ -1,7 +1,6 @@
 <?php
 include 'includes/db.php';
 
-// 1. Seguridad: Si no hay ID, fuera.
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: auth/login.php");
     exit();
@@ -9,27 +8,22 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $userId = $_SESSION['usuario_id'];
 
-// 2. Obtener datos del usuario de forma SEGURA
 $stmt = $pdo->prepare("SELECT username, puntos_totales, nivel FROM usuarios WHERE id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Si el usuario no existe (se borró), cerramos sesión para evitar errores
 if (!$user) {
     session_destroy();
     header("Location: auth/login.php?error=sesion_fantasma");
     exit();
 }
 
-// 3. Extraemos las variables (con valores por defecto para evitar fallos)
 $miUsuario = $user['username'] ?? 'Estudiante';
 $miNivel = $user['nivel'] ?? 1;
 $misPuntos = $user['puntos_totales'] ?? 0;
 
-// Calcular progreso visual
 $progreso = ($misPuntos % 50) * 2; 
 
-// 4. Contar victorias
 try {
     $stmtWins = $pdo->prepare("SELECT COUNT(*) FROM partidas_diarias WHERE usuario_id = ?");
     $stmtWins->execute([$userId]);
@@ -38,7 +32,6 @@ try {
     $victorias = 0;
 }
 
-// Inicial para el avatar
 $inicial = strtoupper(substr($miUsuario, 0, 1));
 ?>
 <!DOCTYPE html>
@@ -96,7 +89,6 @@ $inicial = strtoupper(substr($miUsuario, 0, 1));
         .progress-bar-fill {
             background-color: #4cd137;
             height: 100%;
-            /* YA NO PONEMOS EL WIDTH AQUÍ PARA QUE NO DE ERROR EL EDITOR */
             transition: width 0.5s ease;
         }
     </style>

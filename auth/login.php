@@ -7,7 +7,6 @@
     <title>Login - AnatoWordle</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        /* Estilos específicos para el formulario */
         .auth-container {
             margin-top: 50px;
             width: 90%;
@@ -29,7 +28,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background-color: var(--color-primary); /* Tu rojo #f02109 */
+            background-color: var(--color-primary); 
             color: white;
             border: none;
             font-weight: bold;

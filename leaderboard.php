@@ -1,13 +1,11 @@
 <?php
 include 'includes/db.php';
 
-// Solo usuarios registrados pueden ver el ranking
 if (!isset($_SESSION['usuario_id']) && !isset($_SESSION['is_guest'])) {
     header("Location: auth/login.php");
     exit();
 }
 
-// Consulta SQL: Top 10 usuarios ordenados por puntos (Descendente)
 $stmt = $pdo->query("SELECT username, nivel, puntos_totales FROM usuarios ORDER BY puntos_totales DESC LIMIT 10");
 $topPlayers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -45,7 +43,6 @@ $topPlayers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php 
                     $pos = 1;
                     foreach ($topPlayers as $player): 
-                        // Resaltar al usuario actual
                         $esYo = (isset($_SESSION['username']) && $_SESSION['username'] === $player['username']);
                         $claseFila = $esYo ? 'background-color: #1e1e1f; border: 1px solid #f02109;' : 'border-bottom: 1px solid #3a3a3c;';
                         

@@ -1,7 +1,6 @@
 <?php 
 include 'includes/db.php'; 
 
-// 1. Acceso
 if (!isset($_SESSION['usuario_id']) && !isset($_SESSION['is_guest'])) {
     header("Location: auth/login.php");
     exit();
@@ -12,7 +11,6 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// 2. Datos Usuario
 $puntos = 0;
 $nivel = 1;
 $nombreUsuario = $_SESSION['username'] ?? "Invitado";
@@ -27,9 +25,7 @@ if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_id'] !== null) {
     }
 }
 
-// 3. PALABRA DIARIA (Dinámica)
 $hoy = date("Y-m-d");
-// Si cambia el día o no tenemos palabra, buscamos una nueva
 if (!isset($_SESSION['fecha_palabra']) || $_SESSION['fecha_palabra'] !== $hoy || !isset($_SESSION['palabra_objetivo'])) {
     
     $stmtCount = $pdo->query("SELECT COUNT(*) FROM terminos_anatomia");
@@ -48,14 +44,12 @@ if (!isset($_SESSION['fecha_palabra']) || $_SESSION['fecha_palabra'] !== $hoy ||
         $_SESSION['pista_objetivo'] = $wordData['pista'];
         $_SESSION['fecha_palabra'] = $hoy;
     } else {
-        // Fallback
         $_SESSION['palabra_objetivo'] = "FEMUR";
         $_SESSION['pista_objetivo'] = "El hueso más largo.";
         $_SESSION['fecha_palabra'] = $hoy;
     }
 }
 
-// 4. CALCULAMOS LA LONGITUD PARA DIBUJAR EL TABLERO
 $palabraObjetivo = $_SESSION['palabra_objetivo'];
 $longitudPalabra = strlen($palabraObjetivo);
 ?>
